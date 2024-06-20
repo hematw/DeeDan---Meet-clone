@@ -1,13 +1,17 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import Header from './components/Header'
+import Home from "./pages/Home"
+import Meet from "./pages/Meet"
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Header />
-        <main></main>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='meet/:id' element={<Meet />} />
+          <Route path='*' element={<h1>404</h1>} />
+        </Routes>
       </BrowserRouter>
     </>
   )

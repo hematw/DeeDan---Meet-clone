@@ -1,3 +1,10 @@
+#root {
+  margin: 0;
+  height: 100vh;
+}
+
 body {
-  /* background-color: #cececb; */
+  font-family: 'Roboto', sans-serif;
+  max-height: 100vh;
+  overflow: hidden;
 }
