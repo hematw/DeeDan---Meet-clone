@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaKeyboard, FaLink } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { BsCalendarDate } from "react-icons/bs";
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
+
 
 export default function Main() {
     const [meetCode, setMeetCode] = useState('');
@@ -25,7 +27,11 @@ export default function Main() {
                 <p className="mt-6">Connect, collaborate, and celebrate from anywhere with DiDAAR</p>
 
                 <div className="flex gap-4 mt-12 h-[46px]">
-                    <Dropdown>
+                    <Dropdown
+                    text='New meeting'
+                    icon={<AiOutlineVideoCameraAdd />}
+                    className="flex gap-2 items-center bg-yellow-400 px-6 py-3 rounded-md hover:shadow-md transition-all"
+                    >
                         <div className="origin-top-right absolute left-0 top-0 bg-white mt-2 w-72 rounded-md shadow-xl shadow-gray-500">
                             <ul className="py-1">
                                 <li>

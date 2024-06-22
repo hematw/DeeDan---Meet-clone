@@ -1,9 +1,8 @@
 // src/Dropdown.js
 import React, { useState } from 'react';
-import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 
 
-export default function Dropdown({ children }) {
+export default function Dropdown({ children, text, icon, className }) {
     const [isOpen, setIsOpen] = useState(false);
     const items = ['Item 1', 'Item 2', 'Item 3'];
 
@@ -12,16 +11,17 @@ export default function Dropdown({ children }) {
     };
 
     return (
-        <div className="relative inline-block text-left">
+        <div
+            className="relative inline-block text-left"
+        >
             <div>
                 <button
                     type="button"
-                    className="flex items-center bg-yellow-400 px-6 py-3 rounded-md hover:shadow-md transition-all"
+                    className={className}
                     onClick={toggleDropdown}
-                    onBlur={toggleDropdown}
                 >
-                    <AiOutlineVideoCameraAdd className="mr-2" />
-                    New meeting
+                    <span>{icon}</span>
+                    {text}
                 </button>
             </div>
             {isOpen && children}

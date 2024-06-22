@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import Tile from "../components/Tile"
 import { participantsData } from "../data"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+import Dropdown from "../components/Dropdown"
 import {
+    MdMic,
     MdMicOff,
     MdOutlineScreenShare,
     MdOutlineBackHand,
@@ -12,7 +14,7 @@ import {
     MdOutlineChat,
     MdOutlineWorkspaces
 } from "react-icons/md";
-import { PiVideoCameraSlashBold } from "react-icons/pi";
+import { PiVideoCameraSlashBold, PiVideoCameraBold } from "react-icons/pi";
 import { BsCcSquare, BsEmojiLaughing } from "react-icons/bs";
 import { SlOptionsVertical } from "react-icons/sl";
 
@@ -25,6 +27,9 @@ export default function Meet() {
     )
     const [micOn, setMicOn] = useState(false)
     const [cameraOn, setCameraOn] = useState(false)
+    const [handsUp, setHandsUp] = useState(false)
+
+    const navigate = useNavigate()
 
     const { id } = useParams()
 
@@ -38,7 +43,8 @@ export default function Meet() {
     }, [time])
 
     const micClass = micOn ? 'bg-zinc-600 hover:bg-zinc-700' : 'bg-red-600 hover:bg-red-700'
-    const cameraClass = micOn ? 'bg-zinc-600 hover:bg-zinc-700' : 'bg-red-600 hover:bg-red-700'
+    const handClass = handsUp ? 'bg-yellow-400 hover:bg-yello-500 text-black' : 'bg-zinc-600 hover:bg-zinc-700'
+    const cameraClass = cameraOn ? 'bg-zinc-600 hover:bg-zinc-700' : 'bg-red-600 hover:bg-red-700'
 
     const tiles = participantsData.map((p, index) =>
         <Tile participant={p} key={index} />
@@ -57,27 +63,41 @@ export default function Meet() {
 
                 <div className="text-xl">
                     <button
-                        className={`${micClass} inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2`}>
-                        <MdMicOff />
+                        onClick={() => setMicOn(prevMic => !prevMic)}
+                        className={`${micClass} inline-flex items-center justify-center p-3 rounded-full mx-2`}>
+                        {micOn ? <MdMic /> : <MdMicOff />}
                     </button>
                     <button
-                        className={`${cameraClass} inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2`}>
-                        <PiVideoCameraSlashBold />
+                        onClick={() => setCameraOn(prevCamera => !prevCamera)}
+                        className={`${cameraClass} inline-flex items-center justify-center p-3 rounded-full mx-2`}>
+                        {cameraOn ? <PiVideoCameraBold /> : <PiVideoCameraSlashBold />}
                     </button>
                     <button
                         className="inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2">
                         <BsCcSquare />
                     </button>
-                    <button
-                        className="inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2">
-                        <BsEmojiLaughing />
-                    </button>
+                    <Dropdown
+                        icon={<BsEmojiLaughing />}
+                        className="inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2 relative"
+                    >
+                        <div className="absolute bottom-16 left-1/4 -translate-x-1/2 transition-all inline-flex items-center justify-center gap-2 px-3 py-2 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2">
+                            <span>👍</span>
+                            <span>😂</span>
+                            <span>🥲</span>
+                            <span>❤️</span>
+                            <span>👎</span>
+                            <span>👏</span>
+                            <span>🎉</span>
+                            <span>🤔</span>
+                        </div>
+                    </Dropdown>
                     <button
                         className="inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2">
                         <MdOutlineScreenShare />
                     </button>
                     <button
-                        className="inline-flex items-center justify-center p-3 bg-zinc-600 hover:bg-zinc-700 rounded-full mx-2">
+                        onClick={() => setHandsUp(prevHands => !prevHands)}
+                        className={`${handClass} inline-flex items-center justify-center p-3 rounded-full mx-2`}>
                         <MdOutlineBackHand />
                     </button>
                     <button
@@ -85,6 +105,7 @@ export default function Meet() {
                         <SlOptionsVertical />
                     </button>
                     <button
+                        onClick={() => navigate('/')}
                         className="inline-flex items-center justify-center p-3 bg-red-600 hover:bg-red-700 rounded-full mx-2 w-16 text-center">
                         <MdCallEnd />
                     </button>

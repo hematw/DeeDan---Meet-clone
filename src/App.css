@@ -1,6 +1,8 @@
 #root {
   margin: 0;
   height: 100vh;
+  /* max-width: 1360px; */
+  margin: auto;
 }
 
 body {
@@ -8,7 +10,3 @@ body {
   max-height: 100vh;
   overflow: hidden;
 }
-
-/* .tile-menu {
-  transition: all .3s linear
-} */
