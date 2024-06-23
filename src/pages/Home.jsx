@@ -4,8 +4,10 @@ import Main from "../components/Main"
 export default function Home() {
     return (
         <>
-            <Header />
-            <Main />
+            <section className="w-[1360px] m-auto">
+                <Header />
+                <Main />
+            </section>
         </>
     )
 }
